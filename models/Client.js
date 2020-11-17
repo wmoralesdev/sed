@@ -1,0 +1,19 @@
+const { Schema, Model } = require('mongoose')
+
+const Client = Schema({
+    name: {
+        type: "String",
+        required: "true"
+    },
+    username: {
+        type: "String",
+        required: "true",
+        unique: true
+    },
+    password: {
+        type: "String",
+        required: "true"
+    }
+})
+
+module.exports = Model("Client", Client)
