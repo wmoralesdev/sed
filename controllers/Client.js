@@ -1,10 +1,11 @@
 const Client = require('../models/Client')
 const { hash, compare } = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 var ClientCtrl = {
     create: async(req, res, next) => {
         try {
-            let foundClient = Client.findOne({username: req.body.username})
+            let foundClient = await Client.findOne({username: req.body.username})
 
             if(foundClient)
                 throw 409;
