@@ -1,15 +1,8 @@
 const { Schema, model } = require('mongoose')
 
 const Ticket = Schema({
-    clientId: {
-        type: "String",
-        required: "true"
-    },
-    flightId: {
-        type: "String",
-        required: "true",
-        unique: true
-    }
+    clientId: "String",
+    flightId: "String"
 })
 
 module.exports = model("Ticket", Ticket)

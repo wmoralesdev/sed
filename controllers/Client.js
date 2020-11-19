@@ -28,6 +28,7 @@ var ClientCtrl = {
 
     login: async(req, res, next) => {
         try {
+            console.log(req.body)
             if(!req.body.username && !req.body.password)
                 throw 400
             
@@ -43,6 +44,7 @@ var ClientCtrl = {
             return res.header('Authorize', token).status(200).json(token)
         }
         catch(err) {
+            console.log(err);
             return res.status(err).json({error: true, message: "Something went wrong"})
         }
     },

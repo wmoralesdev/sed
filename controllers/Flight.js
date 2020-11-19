@@ -1,4 +1,5 @@
 const Flight = require('../models/Flight')
+const Ticket = require('../models/Ticket')
 
 const FlightCtrl = { 
     scheduleFlight: async(req, res, next) => {
@@ -71,6 +72,13 @@ const FlightCtrl = {
             var actualFlights = await Flight.find({})
             return res.status(200).json(actualFlights)
         }
+    },
+
+    showClientFlights: async(req, res, next) => {
+        var tickets = await Ticket.find({ clientId: req.client._id })
+        tickets = tickets.map(t => t.flightId)
+        var flights = await Flight.find({ _id: { $in: tickets } })
+        return res.status(200).json(flights)
     }
 }
 

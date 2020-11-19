@@ -4,6 +4,7 @@ const Auth = require('./AuthJwt')
 
 // GET
 router.get('/', FlightCtrl.showFlight)
+router.get('/client', Auth, FlightCtrl.showClientFlights)
 
 // POST
 router.post('/schedule', FlightCtrl.scheduleFlight)

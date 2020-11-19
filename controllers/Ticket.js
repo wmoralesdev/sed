@@ -3,12 +3,13 @@ const Ticket = require('../models/Ticket')
 const TicketCtrl = { 
     generateTicket: async(req, res, next) => {
         try {
+            console.log(req.body);
             let ticket = Ticket({
-                clientId: req.body.clientId,
+                clientId: req.client._id,
                 flightId: req.body.flightId
             })
 
-            ticket.save();
+            await ticket.save();
             return res.status(200).json({error: false, message: "Success", _id: ticket._id})
         }
         catch(err) {
@@ -29,6 +30,11 @@ const TicketCtrl = {
     showTicket: async(req, res, next) => {
         var actualTicket = await Ticket.findOne({_id: req.query._id})
         return res.status(200).json(actualTicket)
+    },
+    
+    showClientTickets: async(req, res, next) => {
+        var clientTickets = await Ticket.find({clientId: req.client._id})
+        return res.status(200).json(clientTickets)
     }
 }
 
